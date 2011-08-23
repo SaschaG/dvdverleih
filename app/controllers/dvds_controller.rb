@@ -34,7 +34,7 @@ class DvdsController < ApplicationController
 
   # GET /dvds/1/edit
   def edit
-    @dvd = Dvd.find(params[:id])
+	@dvd = Dvd.find(params[:id])
   end
 
   # POST /dvds
@@ -57,14 +57,17 @@ class DvdsController < ApplicationController
   # PUT /dvds/1.xml
   def update
     @dvd = Dvd.find(params[:id])
+	@dvd.verliehen = true
+	@dvd.userid = current_user.id
 
     respond_to do |format|
       if @dvd.update_attributes(params[:dvd])
-        format.html { redirect_to(@dvd, :notice => 'Dvd was successfully updated.') }
+        format.html { redirect_to(@dvd, :notice => 'Dvd wurde erfolgreich ausgeliehen.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { render :action => "ausleihen" }
         format.xml  { render :xml => @dvd.errors, :status => :unprocessable_entity }
+		
       end
     end
   end
