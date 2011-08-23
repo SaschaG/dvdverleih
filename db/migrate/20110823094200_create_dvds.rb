@@ -4,6 +4,7 @@ class CreateDvds < ActiveRecord::Migration
       t.string :name
       t.boolean :verliehen
       t.integer :userid
+	  t.integer :anzahl
 
       t.timestamps
     end
