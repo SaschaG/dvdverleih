@@ -1,5 +1,18 @@
+<%if user_signed_in? %>   
+  <% if current_user.role == admin || current_user.role == mitarbeiter %> 
+
 <h1>New dvd</h1>
 
 <%= render 'form' %>
 
 <%= link_to 'Back', dvds_path %>
+
+
+<% else %>
+
+	Nicht zulässig!
+
+  <% end %>
+<% else %>
+Bitte logge dich ein!
+<% end %>
