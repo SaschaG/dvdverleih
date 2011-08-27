@@ -1,23 +1,34 @@
-<h1>Editing dvd</h1>
+<%if user_signed_in? %>   
+  <% if current_user.role == "admin" || current_user.role == "mitarbeiter" %>
 
-<%= form_for(@dvd) do |f| %>
-  <% if @dvd.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@dvd.errors.count, "error") %> prohibited this dvd from being saved:</h2>
+	<h1>Editing dvd</h1>
 
-      <ul>
-      <% @dvd.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+	<%= form_for(@dvd) do |f| %>
+  	  <% if @dvd.errors.any? %>
+    	<div id="error_explanation">
+      	  <h2><%= pluralize(@dvd.errors.count, "error") %> prohibited this dvd from being saved:</h2>
+
+      	  <ul>
+      	    <% @dvd.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+      	    <% end %>
+      	  </ul>
+    	</div>
+  	  <% end %>
   
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="actions">
+      <%= f.submit %>
+  	</div>
+  <% end %>
+
+  <%= link_to 'Show', @dvd %> |
+  <%= link_to 'Back', dvds_path %>
+
+<% else %>
+
+	Nicht zulässig!
+
+  <% end %>
+<% else %>
+Bitte logge dich ein!
 <% end %>
-
-
-<%= link_to 'Show', @dvd %> |
-<%= link_to 'Back', dvds_path %>
