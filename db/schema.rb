@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(:version => 20110823094200) do
     t.string   "name"
     t.string   "beschreibung"
     t.boolean  "verliehen"
-    t.integer  "userid"
+    t.string   "userid"
     t.integer  "anzahl"
     t.datetime "created_at"
     t.datetime "updated_at"

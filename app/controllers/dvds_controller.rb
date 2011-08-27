@@ -57,9 +57,9 @@ class DvdsController < ApplicationController
   # PUT /dvds/1.xml
   def update
     @dvd = Dvd.find(params[:id])
-	if @dvd.verliehen != true
+	if @dvd.verliehen != true && user_signed_in?
 		@dvd.verliehen = true
-		@dvd.userid = current_user.id
+		@dvd.userid = @dvd.userid + ", " + current_user.id
 		respond_to do |format|
       if @dvd.update_attributes(params[:dvd])
         format.html { redirect_to(@dvd, :notice => 'Dvd wurde erfolgreich ausgeliehen.') }
@@ -73,7 +73,7 @@ class DvdsController < ApplicationController
 	else
 		respond_to do |format|
 		if @dvd.update_attributes(params[:dvd])
-			format.html { redirect_to(@dvd, :notice => 'Dvd nicht mehr verfuegbar.') }
+			format.html { redirect_to(@dvd, :notice => 'Log In notwendig, um DVDs auszuleihen!') }
 			format.xml  { head :ok }
 		else
 			format.html { render :action => "edit" }

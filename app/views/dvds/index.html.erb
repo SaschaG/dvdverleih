@@ -3,8 +3,11 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Verliehen</th>
-    <th>Userid</th>
+	<th>Beschreibung</th>
+	<% if current_user.role == "admin" || current_user.role == "mitarbeiter" %>
+		<th>Verliehen</th>
+		<th>Userids</th>
+	<% end %>
     <th></th>
     <th></th>
     <th></th>
@@ -13,15 +16,20 @@
 <% @dvds.each do |dvd| %>
   <tr>
     <td><%= dvd.name %></td>
-    <td><%= dvd.verliehen %></td>
-    <td><%= dvd.userid %></td>
-    <td><%= link_to 'Show', dvd %></td>
-    <td><%= link_to 'Edit', edit_dvd_path(dvd) %></td>
-    <td><%= link_to 'Destroy', dvd, :confirm => 'Are you sure?', :method => :delete %></td>
+	<td><%= dvd.beschreibung %></td>
+	<% if current_user.role == "admin" || current_user.role == "mitarbeiter" %>
+		<td><%= dvd.name %></td>
+		<td><%= dvd.userid %></td>
+	<% end %>
+    <td><%= link_to 'Info', dvd %></td>
+    <td><%= link_to 'Ausleihen', edit_dvd_path(dvd) %></td>
+    <td><% if current_user.role == "admin" || current_user.role == "mitarbeiter" %>
+		<%= link_to 'Loeschen', dvd, :confirm => 'Sicher?', :method => :delete %></td>
+	<% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Dvd', new_dvd_path %>
+<%= link_to 'Neue DVD', new_dvd_path %>
