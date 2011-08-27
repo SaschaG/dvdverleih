@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(:version => 20110823094200) do
 
   create_table "dvds", :force => true do |t|
     t.string   "name"
+    t.string   "beschreibung"
     t.boolean  "verliehen"
     t.integer  "userid"
     t.integer  "anzahl"

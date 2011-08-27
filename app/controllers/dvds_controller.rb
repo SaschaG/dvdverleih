@@ -57,19 +57,32 @@ class DvdsController < ApplicationController
   # PUT /dvds/1.xml
   def update
     @dvd = Dvd.find(params[:id])
-	@dvd.verliehen = true
-	@dvd.userid = current_user.id
-
-    respond_to do |format|
+	if @dvd.verliehen != true
+		@dvd.verliehen = true
+		@dvd.userid = current_user.id
+		respond_to do |format|
       if @dvd.update_attributes(params[:dvd])
         format.html { redirect_to(@dvd, :notice => 'Dvd wurde erfolgreich ausgeliehen.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => "ausleihen" }
+        format.html { render :action => "edit" }
         format.xml  { render :xml => @dvd.errors, :status => :unprocessable_entity }
 		
       end
-    end
+	  end
+	else
+		respond_to do |format|
+		if @dvd.update_attributes(params[:dvd])
+			format.html { redirect_to(@dvd, :notice => 'Dvd nicht mehr verfuegbar.') }
+			format.xml  { head :ok }
+		else
+			format.html { render :action => "edit" }
+			format.xml  { render :xml => @dvd.errors, :status => :unprocessable_entity }
+		end
+		end
+	end
+
+    
   end
 
   # DELETE /dvds/1

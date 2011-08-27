@@ -1,5 +1,33 @@
 <h1>New dvd</h1>
 
-<%= render 'form' %>
+<%= form_for(@dvd) do |f| %>
+  <% if @dvd.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dvd.errors.count, "error") %> prohibited this dvd from being saved:</h2>
 
+      <ul>
+      <% @dvd.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field" height=100>
+    <%= f.label :beschreibung %><br />
+    <%= f.text_field :beschreibung %>
+  </div>
+  <div class="field" width=32>
+    <%= f.label :anzahl  %><br />
+    <%= f.text_field :anzahl %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
 <%= link_to 'Back', dvds_path %>
