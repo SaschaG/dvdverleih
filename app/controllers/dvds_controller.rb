@@ -60,6 +60,7 @@ class DvdsController < ApplicationController
     @dvd = Dvd.find(params[:id])
 	@dvdusers = @dvd.userid.split(', ')
 	@x = 0
+	
 	while @x < @dvdusers.size
 		if @dvdusers[@x] == current_user.id.to_s
 			alreadylent = true
@@ -68,6 +69,7 @@ class DvdsController < ApplicationController
 	end
 	if user_signed_in?
 		if alreadylent != true
+			@dvd.verliehen = @dvd.verliehen + 1
 			if @dvd.userid == ""
 				@dvd.userid = "#{current_user.id}"
 			else

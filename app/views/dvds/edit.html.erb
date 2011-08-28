@@ -1,5 +1,4 @@
 <%if user_signed_in? %>   
-  <% if current_user.role == "admin" || current_user.role == "mitarbeiter" %>
 
 	<h1>DVD ausleihen</h1>
 
@@ -16,19 +15,14 @@
     	</div>
   	  <% end %>
   
-    <div class="actions" value="Ausleihen">
-      <%= f.submit %>
+    <div class="actions">
+      <%= f.submit "ausleihen" %>
   	</div>
   <% end %>
 
   <%= link_to 'Info', @dvd %> |
   <%= link_to 'Zurück', dvds_path %>
 
-<% else %>
-
-	Nicht zulässig!
-
-  <% end %>
 <% else %>
 Bitte logge dich ein!
 <% end %>

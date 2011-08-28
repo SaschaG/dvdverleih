@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20110823094200) do
     t.integer  "verliehen"
     t.string   "userid"
     t.integer  "anzahl"
+    t.string   "bild"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
