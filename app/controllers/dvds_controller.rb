@@ -85,7 +85,7 @@ class DvdsController < ApplicationController
 		else
 			respond_to do |format|
 			if @dvd.update_attributes(params[:dvd])
-				format.html { redirect_to(@dvd, :notice => 'DVD wurde schon von Ihnen ausgeliehen!') }
+				format.html { redirect_to(@dvd, :notice => 'DVD wurde erfolgreich zurueckgenommen.') }
 				format.xml  { head :ok }
 			else
 				format.html { render :action => "edit" }
