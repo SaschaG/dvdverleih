@@ -41,10 +41,11 @@ class DvdsController < ApplicationController
   # POST /dvds.xml
   def create
     @dvd = Dvd.new(params[:dvd])
-
+	@dvd.userid = ""
     respond_to do |format|
       if @dvd.save
-        format.html { redirect_to(@dvd, :notice => 'Dvd was successfully created.') }
+		
+        format.html { redirect_to(@dvd, :notice => 'Dvd erfolgreich erstellt.') }
         format.xml  { render :xml => @dvd, :status => :created, :location => @dvd }
       else
         format.html { render :action => "new" }
@@ -57,19 +58,41 @@ class DvdsController < ApplicationController
   # PUT /dvds/1.xml
   def update
     @dvd = Dvd.find(params[:id])
-	if @dvd.verliehen != true && user_signed_in?
-		@dvd.verliehen = true
-		@dvd.userid = @dvd.userid + ", " + current_user.id
-		respond_to do |format|
-      if @dvd.update_attributes(params[:dvd])
-        format.html { redirect_to(@dvd, :notice => 'Dvd wurde erfolgreich ausgeliehen.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @dvd.errors, :status => :unprocessable_entity }
-		
-      end
-	  end
+	@dvdusers = @dvd.userid.split(', ')
+	@x = 0
+	while @x < @dvdusers.size
+		if @dvdusers[@x] == current_user.id.to_s
+			alreadylent = true
+		end
+		@x = @x + 1
+	end
+	if user_signed_in?
+		if alreadylent != true
+			if @dvd.userid == ""
+				@dvd.userid = "#{current_user.id}"
+			else
+				@dvd.userid = "#{@dvd.userid}, #{current_user.id}"
+			end
+			respond_to do |format|
+				if @dvd.update_attributes(params[:dvd])
+					format.html { redirect_to(@dvd, :notice => 'Dvd wurde erfolgreich ausgeliehen.') }
+					format.xml  { head :ok }
+				else
+					format.html { render :action => "edit" }
+					format.xml  { render :xml => @dvd.errors, :status => :unprocessable_entity }
+				end
+			end
+		else
+			respond_to do |format|
+			if @dvd.update_attributes(params[:dvd])
+				format.html { redirect_to(@dvd, :notice => 'DVD wurde schon von Ihnen ausgeliehen!') }
+				format.xml  { head :ok }
+			else
+				format.html { render :action => "edit" }
+				format.xml  { render :xml => @dvd.errors, :status => :unprocessable_entity }
+			end
+			end
+		end
 	else
 		respond_to do |format|
 		if @dvd.update_attributes(params[:dvd])

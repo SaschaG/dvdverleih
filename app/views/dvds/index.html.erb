@@ -4,9 +4,11 @@
   <tr>
     <th>Name</th>
 	<th>Beschreibung</th>
+	<% if user_signed_in? %>
 	<% if current_user.role == "admin" || current_user.role == "mitarbeiter" %>
 		<th>Verliehen</th>
 		<th>Userids</th>
+	<% end %>
 	<% end %>
     <th></th>
     <th></th>
@@ -17,19 +19,27 @@
   <tr>
     <td><%= dvd.name %></td>
 	<td><%= dvd.beschreibung %></td>
-	<% if current_user.role == "admin" || current_user.role == "mitarbeiter" %>
-		<td><%= dvd.name %></td>
-		<td><%= dvd.userid %></td>
+	<% if user_signed_in? %>
+		<% if current_user.role == "admin" || current_user.role == "mitarbeiter" %>
+			<td><%= dvd.name %></td>
+			<td><%= dvd.userid %></td>
+		<% end %>
 	<% end %>
     <td><%= link_to 'Info', dvd %></td>
     <td><%= link_to 'Ausleihen', edit_dvd_path(dvd) %></td>
-    <td><% if current_user.role == "admin" || current_user.role == "mitarbeiter" %>
-		<%= link_to 'Loeschen', dvd, :confirm => 'Sicher?', :method => :delete %></td>
+	<% if user_signed_in? %>
+		<td><% if current_user.role == "admin" || current_user.role == "mitarbeiter" %>
+			<%= link_to 'Loeschen', dvd, :confirm => 'Sicher?', :method => :delete %></td>
+		<% end %>
 	<% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
+<% if user_signed_in? %>
+	<% if current_user.role == "admin" %>
+		<%= link_to 'Neue DVD', new_dvd_path %>
+	<% end %>
+<% end %>
 
-<%= link_to 'Neue DVD', new_dvd_path %>

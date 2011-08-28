@@ -1,5 +1,10 @@
 <h1>Dvdverleih</h1>
-<p><%= link_to "View List of Users", users_path %></p>
+<% if user_signed_in? %>
+	<% if current_user.role == "admin" %>
+	<p><%= link_to "View List of Users", users_path %></p>
+	<% end %>
+<% end %>
+<p><%= link_to "DVD-Liste", dvds_path %></p>
 
 
 <% if user_signed_in? %>

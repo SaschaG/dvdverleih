@@ -3,7 +3,7 @@ class CreateDvds < ActiveRecord::Migration
     create_table :dvds do |t|
       t.string :name
 	  t.string :beschreibung
-      t.boolean :verliehen
+      t.integer :verliehen
 	  t.string :userid
 	  t.integer :anzahl
 
