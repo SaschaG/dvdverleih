@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
 	has_many :dvds
+	has_many :searches
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
