@@ -5,6 +5,8 @@ Dvdverleih::Application.routes.draw do
  resources :users, :only => [:index, :show]
 
   root :to => "pages#home"
+  match "/pages/kontakt"=>"pages#kontakt"
+  match "/pages/impressum"=>"pages#impressum"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
