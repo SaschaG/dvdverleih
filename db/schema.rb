@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110823094200) do
+ActiveRecord::Schema.define(:version => 20110829121742) do
 
   create_table "dvds", :force => true do |t|
     t.string   "name"
@@ -18,6 +18,13 @@ ActiveRecord::Schema.define(:version => 20110823094200) do
     t.integer  "verliehen"
     t.string   "userid"
     t.integer  "anzahl"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "searches", :force => true do |t|
+    t.string   "words"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

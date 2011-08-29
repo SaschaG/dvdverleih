@@ -1,4 +1,6 @@
 Dvdverleih::Application.routes.draw do
+  resources :searches
+
   resources :dvds
 
  devise_for :users

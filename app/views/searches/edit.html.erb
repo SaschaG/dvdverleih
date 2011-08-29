@@ -1,6 +1,6 @@
-<h1>Listing dvds</h1>
+<h1>Editing search</h1>
 
-
+<%= render 'form' %>
 
 <table>
   <tr>
@@ -18,6 +18,8 @@
   </tr>
 
 <% @dvds.each do |dvd| %>
+  <% if dvd.name == @search.words %>
+
   <tr>
     <td><%= dvd.name %></td>
 	<td><%= dvd.beschreibung %></td>
@@ -35,7 +37,8 @@
 		<% end %>
 	<% end %>
   </tr>
-<% end %>
+<% end %> 
+<% end %> 
 </table>
 
 <br />
@@ -44,4 +47,3 @@
 		<%= link_to 'Neue DVD', new_dvd_path %>
 	<% end %>
 <% end %>
-
