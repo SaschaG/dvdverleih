@@ -1,0 +1,147 @@
+
+
+body {
+	margin: 0px;
+	padding: 0;
+	background-color: #fff;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #72809F;
+}
+
+h1, h2, h3 {
+	margin: 0;
+	font-weight: normal;
+	color: #1E3F7F;
+}
+
+h1 {
+	font-size: 44px;
+}
+
+h2 {
+	font-size: 18px;
+}
+
+h3 {
+text-align: right;
+}
+
+
+
+#header {
+	float: center;
+	width: 800px;
+	height: 500px;
+	margin: 0px auto;
+	background-image: url(banner.jpg); background-repeat:no-repeat;
+	
+}
+
+#menu {
+	display: block;
+	float: left;
+	height: 34px;
+	margin-right: 1px;
+	padding: 30px 30px 0px 30px;
+	letter-spacing: -1px;
+	text-decoration: none;
+	text-align: right;
+	font-family: Arial;
+	font-size: 12px;
+	color: #FFFFFF;
+}
+
+
+
+#search {
+	float: right;
+}
+
+#search form {
+	float: right;
+	margin: 0;
+	padding: 4px 0px 0 0;
+}
+
+#search fieldset {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+#search input {
+	float: left;
+	font: 12px Georgia, "Times New Roman", Times, serif;
+}
+
+#search-text {
+	width: 213px;
+	height: 28px;
+	padding: 6px 0 0 7px;
+	border: none;
+	color: #000000;
+}
+
+#search-submit {
+	width: 82px;
+	height: 28px;
+	margin-left: 10px;
+	padding: 0px 5px;
+	border: none;
+	text-indent: -9999px;
+	color: #FFFFFF;
+}
+
+/* Page */
+
+#page {
+	position: center;
+	width: 50% + 20px;
+	margin: 0px auto 40px auto;
+	padding: 0px;
+}
+
+
+#content {
+	float: right;
+	width: 640px;
+	margin: 0px 0px 0px 0px;
+	padding: 40px 30px 0px 20px;
+}
+
+
+
+#sidebar {
+	float: left;
+	text-align: right;
+	width: 20%;
+	padding: 0px 0px 0px 0px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+
+
+
+
+#footer {
+	width: 920px;
+	height: 60px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+#footer-bgcontent {
+	height: 110px;
+	background: url(images/img02.gif) repeat-x left top;
+}
+
+#footer p {
+	margin: 0;
+	padding: 28px 0px 0px 0px;
+	text-align: center;
+	line-height: normal;
+	font-size: 12px;
+}
+
+

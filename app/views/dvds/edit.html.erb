@@ -1,8 +1,38 @@
 <%if user_signed_in? %>   
-  <% if current_user.role == "admin" || current_user.role == "mitarbeiter" %>
+	<% if current_user.role == "admin" || current_user.role == "mitarbeiter" %>
+		<h1>DVD editieren</h1>
+<%= form_for(@dvd) do |f| %>
+  <% if @dvd.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dvd.errors.count, "error") %> prohibited this dvd from being saved:</h2>
 
-	<h1>DVD ausleihen</h1>
+      <ul>
+      <% @dvd.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :beschreibung %><br />
+    <%= f.text_field :beschreibung %>
+  </div>
+  <div class="field">
+    <%= f.label :anzahl %><br />
+    <%= f.text_field :anzahl %>
+  </div>
+  <div class="actions">
+    <%= f.submit "speichern"%>
+  </div>
+<% end %>
+	<% else %>
+		<h1>DVD ausleihen</h1>
+	<% end %>
 	<%= form_for(@dvd) do |f| %>
   	  <% if @dvd.errors.any? %>
     	<div id="error_explanation">
@@ -17,18 +47,13 @@
   	  <% end %>
   
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit "ausleihen" %>
   	</div>
   <% end %>
 
   <%= link_to 'Info', @dvd %> |
   <%= link_to 'Zurück', dvds_path %>
 
-<% else %>
-
-	Nicht zulässig!
-
-  <% end %>
 <% else %>
 Bitte logge dich ein!
 <% end %>

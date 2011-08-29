@@ -42,6 +42,7 @@ class DvdsController < ApplicationController
   def create
     @dvd = Dvd.new(params[:dvd])
 	@dvd.userid = ""
+	@dvd.verliehen = 0
     respond_to do |format|
       if @dvd.save
 		
@@ -60,6 +61,7 @@ class DvdsController < ApplicationController
     @dvd = Dvd.find(params[:id])
 	@dvdusers = @dvd.userid.split(', ')
 	@x = 0
+	
 	while @x < @dvdusers.size
 		if @dvdusers[@x] == current_user.id.to_s
 			alreadylent = true
@@ -68,6 +70,7 @@ class DvdsController < ApplicationController
 	end
 	if user_signed_in?
 		if alreadylent != true
+			@dvd.verliehen = @dvd.verliehen + 1
 			if @dvd.userid == ""
 				@dvd.userid = "#{current_user.id}"
 			else
@@ -83,9 +86,22 @@ class DvdsController < ApplicationController
 				end
 			end
 		else
+#			@x = 0
+#			@dvd.userid = ""
+#			@dvd.verliehen = @dvd.verliehen - 1
+#			while @x < @dvdusers.size
+#				if current_user.id.to_s == @dvdusers[@x]
+		#			@dvdusers.delete(@x)
+		#		elsif @dvd.userid = ""
+		#			@dvd.userid = "#{@dvdusers[@x]}"
+		#		else
+		#			@dvd.userid = "#{@dvd.userid}, #{@dvdusers[@x]}"
+		#		end
+		#		@x = @x + 1
+		#	end
 			respond_to do |format|
 			if @dvd.update_attributes(params[:dvd])
-				format.html { redirect_to(@dvd, :notice => 'DVD wurde schon von Ihnen ausgeliehen!') }
+				format.html { redirect_to(@dvd, :notice => 'DVD wurde schon von ihnen ausgeliehen') }
 				format.xml  { head :ok }
 			else
 				format.html { render :action => "edit" }
