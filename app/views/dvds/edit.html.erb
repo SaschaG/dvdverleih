@@ -1,7 +1,9 @@
 <%if user_signed_in? %>   
-
-	<h1>DVD ausleihen</h1>
-
+	<% if current_user.role == "admin" || current_user.role == "mitarbeiter" %>
+		<h1>DVD ausleihen/editieren</h1>
+	<% else %>
+		<h1>DVD ausleihen</h1>
+	<% end %>
 	<%= form_for(@dvd) do |f| %>
   	  <% if @dvd.errors.any? %>
     	<div id="error_explanation">
