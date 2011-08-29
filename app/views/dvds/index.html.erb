@@ -18,7 +18,6 @@
 
 <% @dvds.each do |dvd| %>
   <tr>
-	<td><img href="<%= dvd.bild %>"></td>
     <td><%= dvd.name %></td>
 	<td><%= dvd.beschreibung %></td>
 	<% if user_signed_in? %>

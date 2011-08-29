@@ -6,14 +6,25 @@
 </p>
 
 <p>
-  <b>Verliehen:</b>
-  <%= @dvd.verliehen %>
+  <b>Beschreibung:</b>
+  <%= @dvd.beschreibung %>
 </p>
-
-<p>
-  <b>Userid:</b>
-  <%= @dvd.userid %>
-</p>
+<% if user_signd_in? %>
+	<% if current_user.role = "admin" || current_user.role = "mitarbeiter" %>
+		<p>
+			<b>Userid:</b>
+			<%= @dvd.userid %>
+		</p>
+		<p>
+			<b>Anzahl:</b>
+			<%= @dvd.anzahl %>
+		</p>
+		<p>
+			<b>Verliehen:</b>
+			<%= @dvd.verliehen %>
+		</p>
+	<% end %>
+<% end %>
 
 
 <%= link_to 'Edit', edit_dvd_path(@dvd) %> |

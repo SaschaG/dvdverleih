@@ -6,7 +6,6 @@ class CreateDvds < ActiveRecord::Migration
       t.integer :verliehen
 	  t.string :userid
 	  t.integer :anzahl
-	  t.string :bild
 
       t.timestamps
     end
